@@ -1,4 +1,4 @@
-package com.proker.androidtestgameloopgame.Scenes.GameScene.WorldMap;
+package com.proker.androidtestgameloopgame.Scenes.GameScene.WorldMap.Objects;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 
 import com.proker.androidtestgameloopgame.Engine.Constants;
 import com.proker.androidtestgameloopgame.R;
+import com.proker.androidtestgameloopgame.Scenes.GameScene.WorldMap.WorldMap;
 import com.proker.androidtestgameloopgame.Scenes.Scene;
 
 public class Wall implements Scene {

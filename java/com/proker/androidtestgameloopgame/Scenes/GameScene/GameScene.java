@@ -11,6 +11,7 @@ import com.proker.androidtestgameloopgame.Engine.Constants;
 import com.proker.androidtestgameloopgame.GameBoard.GameBoard;
 import com.proker.androidtestgameloopgame.Objects.Player.PlayerManager;
 import com.proker.androidtestgameloopgame.Scenes.Scene;
+import com.proker.androidtestgameloopgame.StatsFrames.Free.FreeStatsColumnMainFrame;
 import com.proker.androidtestgameloopgame.StatsFrames.Free.FreeStatsFrame;
 import com.proker.androidtestgameloopgame.StatsFrames.StatsFrameManager;
 import com.proker.androidtestgameloopgame.TopBar.TopBar;
@@ -87,9 +88,19 @@ public class GameScene implements Scene {
 
         for (int i = 0; i < Constants.PLAYERS_COUNT; ++i) {
             if (playerManager.getPlayers().get(i).isActive()) {
-                FreeStatsFrame.getFreeStatsColumns().get(i).getFreeStatsColumnMainFrame().setActive(true);
+                FreeStatsFrame.freeStatsColumns.get(i).getFreeStatsColumnMainFrame().setActive(true);
             }
         }
+
+        switch (Constants.GAME_SCENE_ACTIVE_SCENE) {
+            case 2:
+                FreeStatsColumnMainFrame.ACTIVE_STATE = 1;
+                break;
+            case 3:
+                FreeStatsColumnMainFrame.ACTIVE_STATE = 0;
+                break;
+        }
+
     }
 
     @Override
@@ -141,7 +152,7 @@ public class GameScene implements Scene {
                     if (gameBoard.getRect().contains((int) event.getX(), (int) event.getY())) {
                         for (int i = 0; i < Constants.PLAYERS_COUNT; ++i) {
                             playerManager.getPlayers().get(i).setActive(false);
-                            FreeStatsFrame.getFreeStatsColumns().get(i).getFreeStatsColumnMainFrame().setActive(false);
+                            FreeStatsFrame.freeStatsColumns.get(i).getFreeStatsColumnMainFrame().setActive(false);
                         }
                     }
                     break;

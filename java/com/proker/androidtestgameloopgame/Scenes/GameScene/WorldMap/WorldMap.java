@@ -11,6 +11,9 @@ import android.view.MotionEvent;
 import com.proker.androidtestgameloopgame.Engine.Constants;
 import com.proker.androidtestgameloopgame.Engine.EngineStrings;
 import com.proker.androidtestgameloopgame.R;
+import com.proker.androidtestgameloopgame.Scenes.GameScene.WorldMap.Objects.BattleCamp;
+import com.proker.androidtestgameloopgame.Scenes.GameScene.WorldMap.Objects.Destination;
+import com.proker.androidtestgameloopgame.Scenes.GameScene.WorldMap.Objects.Wall;
 import com.proker.androidtestgameloopgame.Scenes.Scene;
 
 import java.util.ArrayList;
@@ -32,6 +35,7 @@ public class WorldMap implements Scene {
 
     private ArrayList<Destination> destinations = new ArrayList<>();
     private ArrayList<Wall> walls = new ArrayList<>();
+    private ArrayList<BattleCamp> battleCamps = new ArrayList<>();
 
     public static boolean isMoveLeft = false,
             isMoveRight = false,
@@ -40,10 +44,6 @@ public class WorldMap implements Scene {
             isMovable = false;
 
     public WorldMap() {
-
-
-
-
         paint = new Paint();
 
         // Add Bitmap
@@ -89,6 +89,8 @@ public class WorldMap implements Scene {
         addDestionations();
         // Walls
         addWalls();
+        // Battle Camps
+        addBattleCamps();
     }
 
     private void init() {
@@ -99,12 +101,16 @@ public class WorldMap implements Scene {
         // Test 1
         destinations.add(new Destination(0, xpos + 7 * dx, ypos + 5 * dy));
         // Test 2
-        destinations.add(new Destination(1, xpos + 2 * player.getWidth(), ypos + 3 * player.getHeight()));
+        destinations.add(new Destination(1, xpos + 2 * dx, ypos + 3 * dy));
     }
 
     private void addWalls() {
         walls.add(new Wall(xpos + 5 * dx, ypos + 2 * dy));
         walls.add(new Wall(xpos + 20 * dx, ypos + 5 * dy));
+    }
+
+    private void addBattleCamps() {
+        battleCamps.add(new BattleCamp(0, xpos + 9 * dx, ypos + 13 * dy));
     }
 
     @Override
@@ -132,6 +138,10 @@ public class WorldMap implements Scene {
                 for (Wall wall : walls) {
                     wall.update();
                 }
+                // Update battle camps
+                for (BattleCamp battleCamp : battleCamps) {
+                    battleCamp.update();
+                }
                 xpos += dx;
             }
 
@@ -157,6 +167,10 @@ public class WorldMap implements Scene {
                 // Update walls
                 for (Wall wall : walls) {
                     wall.update();
+                }
+                // Update battle camps
+                for (BattleCamp battleCamp : battleCamps) {
+                    battleCamp.update();
                 }
                 xpos -= dx;
             }
@@ -184,6 +198,10 @@ public class WorldMap implements Scene {
                 for (Wall wall : walls) {
                     wall.update();
                 }
+                // Update battle camps
+                for (BattleCamp battleCamp : battleCamps) {
+                    battleCamp.update();
+                }
                 ypos += dy;
             }
 
@@ -210,6 +228,10 @@ public class WorldMap implements Scene {
                 for (Wall wall : walls) {
                     wall.update();
                 }
+                // Update battle camps
+                for (BattleCamp battleCamp : battleCamps) {
+                    battleCamp.update();
+                }
                 ypos -= dy;
             }
 
@@ -230,6 +252,11 @@ public class WorldMap implements Scene {
         for (Destination destination : destinations) {
             destination.checkCollision();
         }
+        // Update battle camps collision
+        // Update battle camps
+        for (BattleCamp battleCamp : battleCamps) {
+            battleCamp.checkCollision();
+        }
     }
 
     @Override
@@ -249,6 +276,11 @@ public class WorldMap implements Scene {
         // Draw walls
         for (Wall wall : walls) {
             wall.draw(canvas);
+        }
+
+        // Draw battle camps
+        for (BattleCamp battleCamp : battleCamps) {
+            battleCamp.draw(canvas);
         }
 
         // DELETE

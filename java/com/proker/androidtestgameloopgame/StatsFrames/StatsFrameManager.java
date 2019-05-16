@@ -3,7 +3,6 @@ package com.proker.androidtestgameloopgame.StatsFrames;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
-import com.proker.androidtestgameloopgame.StatsFrames.Battle.BattleStatsFrame;
 import com.proker.androidtestgameloopgame.StatsFrames.Free.FreeStatsFrame;
 import com.proker.androidtestgameloopgame.StatsFrames.Quest.QuestStatsFrame;
 
@@ -16,7 +15,6 @@ public class StatsFrameManager {
     public StatsFrameManager() {
         ACTIVE_FRAME = 0;
         statsFrame.add(new FreeStatsFrame());
-        statsFrame.add(new BattleStatsFrame());
         statsFrame.add(new QuestStatsFrame());
     }
 

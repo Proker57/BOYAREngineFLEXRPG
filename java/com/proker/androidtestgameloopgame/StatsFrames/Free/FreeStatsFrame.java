@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class FreeStatsFrame implements StatsFrame {
 
-    private static ArrayList<FreeStatsColumn> freeStatsColumns = new ArrayList<>();
+    public static ArrayList<FreeStatsColumn> freeStatsColumns = new ArrayList<>();
 
     public FreeStatsFrame() {
         Constants.FREE_STATS_COLUMN_WIDTH = (int) (Constants.SCREEN_WIDTH / 4);
@@ -43,9 +43,5 @@ public class FreeStatsFrame implements StatsFrame {
         for (FreeStatsColumn column : freeStatsColumns) {
             column.recieveTouch(event);
         }
-    }
-
-    public static ArrayList<FreeStatsColumn> getFreeStatsColumns() {
-        return freeStatsColumns;
     }
 }

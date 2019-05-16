@@ -16,7 +16,6 @@ public class FreeStatsColumn implements StatsFrame {
     private FreeStatsColumnMainFrame freeStatsColumnMainFrame;
     private ButtonManager spellButtonManager;
     private String spell_button_text;
-    //private PlayerManager playerManager;
 
     public FreeStatsColumn(int index, int xpos) {
         this.index = index;
@@ -28,9 +27,6 @@ public class FreeStatsColumn implements StatsFrame {
         // Add stats frame
         freeStatsColumnMainFrame = new FreeStatsColumnMainFrame(index, xpos);
 
-        // Add Player
-        //playerManager = new PlayerManager(4);
-
         // Add spell button
         spellButtonManager = new ButtonManager();
         spellButtonManager.add(xpos, Constants.STATS_COLUMN_SPELL_BUTTON_Y, Constants.STATS_COLUMN_SPELL_BUTTON_WIDTH, Constants.STATS_COLUMN_SPELL_BUTTON_HEIGHT, spell_button_text, Constants.CURRENT_CONTEXT.getResources().getDimension(R.dimen.freeStatsColumn_spellButtonManager_button), Color.WHITE);
@@ -40,20 +36,17 @@ public class FreeStatsColumn implements StatsFrame {
     public void update() {
         spellButtonManager.update();
         freeStatsColumnMainFrame.update();
-        //playerManager.update();
     }
 
     @Override
     public void draw(Canvas canvas) {
         spellButtonManager.draw(canvas);
         freeStatsColumnMainFrame.draw(canvas);
-        //playerManager.draw(canvas);
     }
 
     @Override
     public void recieveTouch(MotionEvent event) {
         freeStatsColumnMainFrame.recieveTouch(event);
-        //playerManager.recieveTouch(event);
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:

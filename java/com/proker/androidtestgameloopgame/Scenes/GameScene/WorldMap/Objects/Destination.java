@@ -1,4 +1,4 @@
-package com.proker.androidtestgameloopgame.Scenes.GameScene.WorldMap;
+package com.proker.androidtestgameloopgame.Scenes.GameScene.WorldMap.Objects;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,7 +9,9 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 
 import com.proker.androidtestgameloopgame.Engine.Constants;
+import com.proker.androidtestgameloopgame.Engine.EngineStrings;
 import com.proker.androidtestgameloopgame.R;
+import com.proker.androidtestgameloopgame.Scenes.GameScene.WorldMap.WorldMap;
 import com.proker.androidtestgameloopgame.Scenes.Scene;
 
 public class Destination implements Scene {
@@ -30,7 +32,7 @@ public class Destination implements Scene {
         this.y = ypos;
 
         BitmapFactory bf = new BitmapFactory();
-        bitmap = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.destination);
+        bitmap = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.world_map_destination);
 
         width = bitmap.getWidth();
         height = bitmap.getHeight();
@@ -74,15 +76,17 @@ public class Destination implements Scene {
     public void checkCollision() {
         // Check collision
         if (rect.intersect(WorldMap.rectPlayer)) {
+            System.out.println(EngineStrings.engineText() + "Destination " + index + " intersects");
             switch (index) {
                 case 0:
-                    System.out.println("Index 0 intersects");
+
                     break;
                 case 1:
-                    System.out.println("Index 1 intersects");
+
                     break;
             }
         }
+
     }
 
     @Override

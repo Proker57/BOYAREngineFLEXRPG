@@ -19,6 +19,7 @@ import com.proker.androidtestgameloopgame.StatsFrames.StatsFrame;
 import java.util.ArrayList;
 
 public class FreeStatsColumnMainFrame implements StatsFrame {
+    public static int ACTIVE_STATE;
     private int index, xpos;
     private Rect rect;
     private String HP, AP, WPN, NAME, RES, VDK, BEER, CTL, DEF, LVL, EXP, EXPMIN, EXPMAX, EVD, CRT, TYPE, STR, DEX, CON;
@@ -39,6 +40,8 @@ public class FreeStatsColumnMainFrame implements StatsFrame {
     public FreeStatsColumnMainFrame(int index, int xpos) {
         this.index = index;
         this.xpos = xpos;
+
+        ACTIVE_STATE = 0;
 
         paint = new Paint();
         rect = new Rect(xpos, Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y, xpos + Constants.FREE_STATS_COLUMN_WIDTH, Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_HEIGHT);
@@ -123,136 +126,143 @@ public class FreeStatsColumnMainFrame implements StatsFrame {
             }
         }
 
-        switch (state) {
-            case 0:     // Main stats
-                paint.setColor(Color.rgb(150, 0, 0));
-                canvas.drawRect(rect, paint);
-                paint.setColor(Color.WHITE);
-                paint.setTextSize(Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text));
-                canvas.drawText(HP, xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 1.2f), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 2), FontManager.FreeStatsCoumnMainFrameStats());
-                // HP current
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 2.5f));
-                slHPC.draw(canvas);
-                canvas.restore();
+        switch (ACTIVE_STATE) {
+            case 0:
+                switch (state) {
+                    case 0:     // Main stats
+                        paint.setColor(Color.rgb(150, 0, 0));
+                        canvas.drawRect(rect, paint);
+                        paint.setColor(Color.WHITE);
+                        paint.setTextSize(Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text));
+                        canvas.drawText(HP, xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 1.2f), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 2), FontManager.FreeStatsCoumnMainFrameStats());
+                        // HP current
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 2.5f));
+                        slHPC.draw(canvas);
+                        canvas.restore();
 
-                canvas.drawText(AP, xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 1.2f), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 5), FontManager.FreeStatsCoumnMainFrameStats());
-                // AP current
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 5.5f));
-                slAPC.draw(canvas);
-                canvas.restore();
+                        canvas.drawText(AP, xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 1.2f), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 5), FontManager.FreeStatsCoumnMainFrameStats());
+                        // AP current
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 5.5f));
+                        slAPC.draw(canvas);
+                        canvas.restore();
 
-                canvas.drawText(WPN, xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 1.2f), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 8), FontManager.FreeStatsCoumnMainFrameStats());
-                // WPN current
+                        canvas.drawText(WPN, xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 1.2f), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 8), FontManager.FreeStatsCoumnMainFrameStats());
+                        // WPN current
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 8.5f));
+                        slWPNC.draw(canvas);
+                        canvas.restore();
+                        break;
+                    case 1:     // Res
+                        // Background
+                        paint.setColor(Color.rgb(0, 150, 0));
+                        canvas.drawRect(rect, paint);
+                        // Text
+                        paint.setColor(Color.WHITE);
+                        paint.setTextSize(Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text));
+                        canvas.drawText(RES, xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 1.2f), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 2), FontManager.FreeStatsCoumnMainFrameStats());
+                        // VDK
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 3));
+                        slVDK.draw(canvas);
+                        canvas.restore();
+                        // BEER
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 4.5f));
+                        slBEER.draw(canvas);
+                        canvas.restore();
+                        // CTL
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 6));
+                        slCTL.draw(canvas);
+                        canvas.restore();
+                        // DEF
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 7.5f));
+                        slDEF.draw(canvas);
+                        canvas.restore();
+                        break;
+                    case 2:     // Crits
+                        // Background
+                        paint.setColor(Color.rgb(0, 0, 150));
+                        canvas.drawRect(rect, paint);
+                        // Text
+                        paint.setColor(Color.WHITE);
+                        paint.setTextSize(Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text));
+                        // LVL
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)));
+                        slLVL.draw(canvas);
+                        canvas.restore();
+                        // EXP
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 3.5f));
+                        slEXP.draw(canvas);
+                        canvas.restore();
+                        // EXP MIN
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 5));
+                        slEXPMIN.draw(canvas);
+                        canvas.restore();
+                        // EXP MAX
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 6.5f));
+                        slEXPMAX.draw(canvas);
+                        canvas.restore();
+                        // EVD
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 9));
+                        slEVD.draw(canvas);
+                        canvas.restore();
+                        // CRT
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 10.5f));
+                        slCRT.draw(canvas);
+                        canvas.restore();
+                        break;
+                    case 3:     // STR/DEX/CON
+                        // Background
+                        paint.setColor(Color.rgb(150, 150, 150));
+                        canvas.drawRect(rect, paint);
+                        // Text
+                        paint.setColor(Color.WHITE);
+                        paint.setTextSize(Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text));
+                        // STR
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)));
+                        slSTR.draw(canvas);
+                        canvas.restore();
+                        // DEX
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 2.5f));
+                        slDEX.draw(canvas);
+                        canvas.restore();
+                        // CON
+                        canvas.save();
+                        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 4f));
+                        slCON.draw(canvas);
+                        canvas.restore();
+                        break;
+                }
+
+                if (isActive()) {
+                    paint.setColor(Color.argb(40, 255, 255,255));
+                    canvas.drawRect(rect, paint);
+                }
+
+                canvas.drawText(NAME, xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 1.2f), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 14), FontManager.FreeStatsCoumnMainFrameStats());
+                // NAME current
                 canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 8.5f));
-                slWPNC.draw(canvas);
+                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 14.5f));
+                slNAMEC.draw(canvas);
                 canvas.restore();
                 break;
-            case 1:     // Res
-                // Background
-                paint.setColor(Color.rgb(0, 150, 0));
-                canvas.drawRect(rect, paint);
-                // Text
-                paint.setColor(Color.WHITE);
-                paint.setTextSize(Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text));
-                canvas.drawText(RES, xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 1.2f), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 2), FontManager.FreeStatsCoumnMainFrameStats());
-                // VDK
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 3));
-                slVDK.draw(canvas);
-                canvas.restore();
-                // BEER
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 4.5f));
-                slBEER.draw(canvas);
-                canvas.restore();
-                // CTL
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 6));
-                slCTL.draw(canvas);
-                canvas.restore();
-                // DEF
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 7.5f));
-                slDEF.draw(canvas);
-                canvas.restore();
-                break;
-            case 2:     // Crits
-                // Background
-                paint.setColor(Color.rgb(0, 0, 150));
-                canvas.drawRect(rect, paint);
-                // Text
-                paint.setColor(Color.WHITE);
-                paint.setTextSize(Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text));
-                // LVL
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)));
-                slLVL.draw(canvas);
-                canvas.restore();
-                // EXP
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 3.5f));
-                slEXP.draw(canvas);
-                canvas.restore();
-                // EXP MIN
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 5));
-                slEXPMIN.draw(canvas);
-                canvas.restore();
-                // EXP MAX
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 6.5f));
-                slEXPMAX.draw(canvas);
-                canvas.restore();
-                // EVD
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 9));
-                slEVD.draw(canvas);
-                canvas.restore();
-                // CRT
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 10.5f));
-                slCRT.draw(canvas);
-                canvas.restore();
-                break;
-            case 3:     // STR/DEX/CON
-                // Background
-                paint.setColor(Color.rgb(150, 150, 150));
-                canvas.drawRect(rect, paint);
-                // Text
-                paint.setColor(Color.WHITE);
-                paint.setTextSize(Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text));
-                // STR
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)));
-                slSTR.draw(canvas);
-                canvas.restore();
-                // DEX
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 2.5f));
-                slDEX.draw(canvas);
-                canvas.restore();
-                // CON
-                canvas.save();
-                canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 4f));
-                slCON.draw(canvas);
-                canvas.restore();
+            case 1:
+
                 break;
         }
-
-        if (isActive()) {
-            paint.setColor(Color.argb(40, 255, 255,255));
-            canvas.drawRect(rect, paint);
-        }
-
-        canvas.drawText(NAME, xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 1.2f), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 14), FontManager.FreeStatsCoumnMainFrameStats());
-        // NAME current
-        canvas.save();
-        canvas.translate(xpos + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text)), Constants.FREE_STATS_COLUMN_MAIN_FRAME_RECT_Y + (Constants.CURRENT_CONTEXT.getResources().getDimensionPixelSize(R.dimen.freeStatsColumnMainFrame_stats_text) * 14.5f));
-        slNAMEC.draw(canvas);
-        canvas.restore();
     }
 
     // Help timer
@@ -280,28 +290,35 @@ public class FreeStatsColumnMainFrame implements StatsFrame {
 
     @Override
     public void recieveTouch(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                if (rect.contains((int) event.getX(), (int) event.getY())) {
-                    handler.postDelayed(mLongPressed, 1000);
+        switch (ACTIVE_STATE) {
+            case 0:
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        if (rect.contains((int) event.getX(), (int) event.getY())) {
+                            handler.postDelayed(mLongPressed, 1000);
+                        }
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        // Spell button
+                        if (rect.contains((int) event.getX(), (int) event.getY()) && helpFrameIsVisible == false) {
+                            if (state < 3) {
+                                state++;
+                            } else {
+                                state = 0;
+                            }
+                            System.out.println(EngineStrings.engineText() + " Free Stats Column Main Frame " + index + " pressed");
+                        }
+                        handler.removeCallbacks(mLongPressed);
+                        // Remove help frame object
+                        if (!helpFrames.isEmpty()) {
+                            helpFrames.remove(0);
+                            helpFrameIsVisible = false;
+                        }
+                        break;
                 }
                 break;
-            case MotionEvent.ACTION_UP:
-                // Spell button
-                if (rect.contains((int) event.getX(), (int) event.getY()) && helpFrameIsVisible == false) {
-                    if (state < 3) {
-                        state++;
-                    } else {
-                        state = 0;
-                    }
-                    System.out.println(EngineStrings.engineText() + " Free Stats Column Main Frame " + index + " pressed");
-                }
-                handler.removeCallbacks(mLongPressed);
-                // Remove help frame object
-                if (!helpFrames.isEmpty()) {
-                    helpFrames.remove(0);
-                    helpFrameIsVisible = false;
-                }
+            case 1:
+
                 break;
         }
     }
