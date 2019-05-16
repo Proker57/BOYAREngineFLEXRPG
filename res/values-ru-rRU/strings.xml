@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidTestGameloopGame</string>
+    <string name="new_game">Начать</string>
+    <string name="options">Настройки</string>
+    <string name="about_text">Спасибо что скачали нашу игру. Мы надеемся вам понравится играть в нее!</string>
+    <string name="back">Назад</string>
+    <string name="stats_wpn">ОРЖ:</string>
+    <string name="stats_spell_button">НАВЫК</string>
+    <string name="stats_ap">ОД:</string>
+    <string name="stats_hp">ОЗ:</string>
+    <string name="stats_beer">ПИВО:</string>
+    <string name="stats_ctl">КТЛ:</string>
+    <string name="stats_def">ЗАЩ:</string>
+    <string name="stats_res">СПР:</string>
+    <string name="stats_vdk">ВДК:</string>
+    <string name="stats_crt">КРТ:</string>
+    <string name="stats_evd">УКЛ:</string>
+    <string name="stats_exp">ОПТ:</string>
+    <string name="stats_lvl">УРВ:</string>
+    <string name="stats_type">ТИП:</string>
+    <string name="stats_con">ТЕЛ:</string>
+    <string name="stats_dex">ЛОВ:</string>
+    <string name="stats_str">СИЛ:</string>
+    <string name="help_frame_1_state">ОЗ: - Очки Здоровья\nОД: - Очки Действий\nОРЖ: - Оружие</string>
+    <string name="help_frame_2_state">СПР: - Сопротивление\nВДК: - Водка\nПИВО: - Пиво\nКТЛ: - Коктейль\nЗАЩ: - Защита\n</string>
+    <string name="help_frame_3_state">УРВ: - Уровень\nОПТ: - Опыт\nУКЛ: - Уклонение\nКРТ: - Критический удар</string>
+    <string name="help_frame_4_state">СИЛ: - Сила\nЛОВ: - Ловкость\nТЕЛ: - Телосложение</string>
+    <string name="stats_name">ИМЯ:</string>
+</resources>

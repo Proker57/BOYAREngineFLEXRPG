@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">AndroidTestGameloopGame</string>
+    <string name="new_game">Start</string>
+    <string name="options">Options</string>
+    <string name="about" translatable="false">About</string>
+    <string name="back">Back</string>
+    <string name="about_text">Thank you for downloading our game. We hope you will enjoy playing game! </string>
+    <string name="stats_hp">HP:</string>
+    <string name="stats_ap">AP:</string>
+    <string name="stats_wpn">WPN:</string>
+    <string name="stats_spell_button">SPELL</string>
+    <string name="stats_res">RES:</string>
+    <string name="stats_vdk">VDK:</string>
+    <string name="stats_beer">BEER:</string>
+    <string name="stats_ctl">CTL:</string>
+    <string name="stats_def">DEF:</string>
+    <string name="stats_lvl">LVL:</string>
+    <string name="stats_exp">EXP:</string>
+    <string name="stats_evd">EVD:</string>
+    <string name="stats_crt">CRT:</string>
+    <string name="stats_type">TYPE:</string>
+    <string name="stats_str">STR:</string>
+    <string name="stats_dex">DEX:</string>
+    <string name="stats_con">CON:</string>
+    <string name="help_frame_1_state">HP: - Health Points\nAP: - Ability Points\nWPN: - Weapon</string>
+    <string name="help_frame_2_state">RES: - Resist\nVDK: - Vodka\nBEER: - Beer\nCTL: - Cocktail\nDEF: - Defend</string>
+    <string name="help_frame_3_state">LVL: - Level\nEXP: - Experience\nEVD: - Evade\nCRT: - Crit</string>
+    <string name="help_frame_4_state">STR: - Strength\nDEX: - Dexterity\nCON: - Constitution</string>
+    <string name="stats_name">NAME:</string>
+</resources>

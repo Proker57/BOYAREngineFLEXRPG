@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mainmenu_buttons">22sp</dimen>
+    <dimen name="mainmenu_about_text">16sp</dimen>
+    <dimen name="mainmenu_back_button">16sp</dimen>
+
+    <dimen name="freeStatsColumn_spellButtonManager_button">14sp</dimen>
+
+    <dimen name="freeStatsColumnMainFrame_stats_text">10sp</dimen>
+</resources>
