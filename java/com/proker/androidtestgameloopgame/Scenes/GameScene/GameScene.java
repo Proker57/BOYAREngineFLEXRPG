@@ -30,7 +30,7 @@ public class GameScene implements Scene {
 
 
 
-    //private int ACTIVE_STATE = -1;   // 0 = Names frame, 1 = intro, 2 = free, 3 = world map
+    //private int ACTIVE_STATE = -1;   // 0 = Names frame, 1 = intro, 2 = battle, 3 = world map
 
 
     public GameScene() {
@@ -98,7 +98,7 @@ public class GameScene implements Scene {
         // Fill background with solid color
         canvas.drawColor(Color.GREEN);
 
-        // Free
+        // Battle
         if (Constants.GAME_SCENE_ACTIVE_SCENE == 2) {
             // Draw top bar
             topBar.draw(canvas);
@@ -112,7 +112,7 @@ public class GameScene implements Scene {
             bottomButtons.draw(canvas);
         }
 
-        // Add world map
+        // World map
         if (Constants.GAME_SCENE_ACTIVE_SCENE == 3) {
             gameBoard.draw(canvas);
             topBar.draw(canvas);
@@ -128,7 +128,7 @@ public class GameScene implements Scene {
 
     @Override
     public void recieveTouch(MotionEvent event) {
-        // Free
+        // Battle
         if (Constants.GAME_SCENE_ACTIVE_SCENE == 2) {
 
             statsFrameManager.recieveTouch(event);
@@ -152,7 +152,6 @@ public class GameScene implements Scene {
 
         // World map
         if (Constants.GAME_SCENE_ACTIVE_SCENE == 3) {
-
             gameBoard.recieveTouch(event);
             statsFrameManager.recieveTouch(event);
             bottomButtons.recieveTouch(event);
