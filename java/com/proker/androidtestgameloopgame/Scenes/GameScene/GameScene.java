@@ -8,10 +8,10 @@ import android.view.MotionEvent;
 
 import com.proker.androidtestgameloopgame.BottomButtons.BottomButtons;
 import com.proker.androidtestgameloopgame.Engine.Constants;
+import com.proker.androidtestgameloopgame.Engine.EngineStrings;
 import com.proker.androidtestgameloopgame.GameBoard.GameBoard;
 import com.proker.androidtestgameloopgame.Objects.Player.PlayerManager;
 import com.proker.androidtestgameloopgame.Scenes.Scene;
-import com.proker.androidtestgameloopgame.StatsFrames.Free.FreeStatsColumnMainFrame;
 import com.proker.androidtestgameloopgame.StatsFrames.Free.FreeStatsFrame;
 import com.proker.androidtestgameloopgame.StatsFrames.StatsFrameManager;
 import com.proker.androidtestgameloopgame.TopBar.TopBar;
@@ -29,13 +29,13 @@ public class GameScene implements Scene {
 
     private PlayerManager playerManager;
 
-
-
     //private int ACTIVE_STATE = -1;   // 0 = Names frame, 1 = intro, 2 = battle, 3 = world map
-
 
     public GameScene() {
         init();
+
+        // Add players
+        playerManager = new PlayerManager(Constants.PLAYERS_COUNT);
 
         rect = new Rect(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         paint = new Paint();
@@ -44,18 +44,18 @@ public class GameScene implements Scene {
         topBar = new TopBar();
         // Set game board rect
         gameBoard = new GameBoard();
+
         // Add Stats frame manager
         statsFrameManager = new StatsFrameManager();
         // Add bottom buttons
         bottomButtons = new BottomButtons();
 
-        // Add player
-        playerManager = new PlayerManager(Constants.PLAYERS_COUNT);
-
+        setVars();
     }
 
     private void init() {
         // Game Scene **********************************************************************************
+        Constants.PLAYERS_COUNT = 4;
         // Active scene
         Constants.GAME_SCENE_ACTIVE_SCENE = -1;
         // Top bar
@@ -78,6 +78,10 @@ public class GameScene implements Scene {
         Constants.BOTTOM_BUTTON_HEIGHT = Constants.SCREEN_HEIGHT - ((int) (Constants.SCREEN_HEIGHT * 0.9) + (int) (Constants.SCREEN_HEIGHT - (Constants.SCREEN_HEIGHT * 0.95)));
     }
 
+    private void setVars() {
+        //playerManager.getPlayers().get(0).setName(Constants.CURRENT_CONTEXT.getString(R.string.player_1_name));
+    }
+
     @Override
     public void update() {
         topBar.update();
@@ -86,20 +90,16 @@ public class GameScene implements Scene {
         bottomButtons.update();
         playerManager.update();
 
-        for (int i = 0; i < Constants.PLAYERS_COUNT; ++i) {
-            if (playerManager.getPlayers().get(i).isActive()) {
-                FreeStatsFrame.freeStatsColumns.get(i).getFreeStatsColumnMainFrame().setActive(true);
+        try {
+            for (int i = 0; i < Constants.PLAYERS_COUNT; ++i) {
+                if (playerManager.getPlayers().get(i).isActive()) {
+                    FreeStatsFrame.freeStatsColumns.get(i).getFreeStatsColumnMainFrame().setActive(true);
+                }
             }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(EngineStrings.engineText() + "ERROR: Player ArrayList is out of bounds, Size: " + playerManager.getPlayers().size());
         }
 
-        switch (Constants.GAME_SCENE_ACTIVE_SCENE) {
-            case 2:
-                FreeStatsColumnMainFrame.ACTIVE_STATE = 1;
-                break;
-            case 3:
-                FreeStatsColumnMainFrame.ACTIVE_STATE = 0;
-                break;
-        }
 
     }
 
@@ -169,5 +169,9 @@ public class GameScene implements Scene {
             topBar.recieveTouch(event);
         }
 
+    }
+
+    public PlayerManager getPlayerManager() {
+        return playerManager;
     }
 }

@@ -8,12 +8,14 @@ import com.proker.androidtestgameloopgame.Objects.GameObject;
 import java.util.ArrayList;
 
 public class EnemyManager implements GameObject {
+    private int count, index;
 
     private ArrayList<Enemy> enemies = new ArrayList<>();
 
-    public EnemyManager() {
+    public EnemyManager(int count) {
+        this.count = count;
         for (int i = 0; i <= 4; ++i) {
-            enemies.add(new Enemy());
+            enemies.add(new Enemy(index));
         }
     }
 

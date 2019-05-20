@@ -1,6 +1,7 @@
 package com.proker.androidtestgameloopgame.Engine.Main;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -12,7 +13,8 @@ import com.proker.androidtestgameloopgame.Engine.EngineStrings;
 import com.proker.androidtestgameloopgame.Engine.NavigationBar;
 
 public class MainActivity extends Activity {
-    View decorView;
+    private View decorView;
+    public SharedPreferences s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,9 @@ public class MainActivity extends Activity {
         System.out.println(EngineStrings.engineText() + "Size of screen loaded");
         Constants.SCREEN_WIDTH = NavigationBar.getRealScreenSize(this).x;
         Constants.SCREEN_HEIGHT = NavigationBar.getRealScreenSize(this).y;
+
+        // Create saveFile
+        save();
 
         setContentView(new GamePanel(this));
     }
@@ -67,4 +72,13 @@ public class MainActivity extends Activity {
 
         super.onResume();
     }
+
+    private void save() {
+        s = getSharedPreferences("saveFile", MODE_PRIVATE);
+        SharedPreferences.Editor e = s.edit();
+        e.putString("player_1_HPC", "11");
+        e.putString("player_1_HPMAX", "111");
+        e.commit();
+    }
+
 }

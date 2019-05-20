@@ -27,4 +27,8 @@
     <string name="help_frame_3_state">УРВ: - Уровень\nОПТ: - Опыт\nУКЛ: - Уклонение\nКРТ: - Критический удар</string>
     <string name="help_frame_4_state">СИЛ: - Сила\nЛОВ: - Ловкость\nТЕЛ: - Телосложение</string>
     <string name="stats_name">ИМЯ:</string>
+    <string name="player_1_name">Первый</string>
+    <string name="player_2_name">Второй</string>
+    <string name="player_3_name">Третий</string>
+    <string name="player_4_name">Четвертый</string>
 </resources>

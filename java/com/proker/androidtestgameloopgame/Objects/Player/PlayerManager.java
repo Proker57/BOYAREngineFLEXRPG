@@ -43,8 +43,8 @@ public class PlayerManager implements GameObject {
         return players;
     }
 
-    public static void setPlayers(ArrayList<Player> players) {
-        PlayerManager.players = players;
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
     }
 
 }

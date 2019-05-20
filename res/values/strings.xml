@@ -27,4 +27,8 @@
     <string name="help_frame_3_state">LVL: - Level\nEXP: - Experience\nEVD: - Evade\nCRT: - Crit</string>
     <string name="help_frame_4_state">STR: - Strength\nDEX: - Dexterity\nCON: - Constitution</string>
     <string name="stats_name">NAME:</string>
+    <string name="player_1_name">First</string>
+    <string name="player_2_name">Second</string>
+    <string name="player_3_name">Third</string>
+    <string name="player_4_name">Fourth</string>
 </resources>

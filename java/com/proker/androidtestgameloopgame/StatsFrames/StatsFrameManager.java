@@ -9,7 +9,8 @@ import com.proker.androidtestgameloopgame.StatsFrames.Quest.QuestStatsFrame;
 import java.util.ArrayList;
 
 public class StatsFrameManager {
-    public ArrayList<StatsFrame> statsFrame = new ArrayList<>();
+
+    private ArrayList<StatsFrame> statsFrame = new ArrayList<>();
     public static int ACTIVE_FRAME;
 
     public StatsFrameManager() {
@@ -29,5 +30,9 @@ public class StatsFrameManager {
 
     public void draw(Canvas canvas) {
         statsFrame.get(ACTIVE_FRAME).draw(canvas);
+    }
+
+    public ArrayList<StatsFrame> getStatsFrame() {
+        return statsFrame;
     }
 }
