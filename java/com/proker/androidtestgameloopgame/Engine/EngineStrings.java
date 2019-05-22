@@ -1,5 +1,7 @@
 package com.proker.androidtestgameloopgame.Engine;
 
+import com.proker.androidtestgameloopgame.Objects.Player.PlayerManager;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -15,6 +17,26 @@ public abstract class EngineStrings {
             e.printStackTrace();
 
             return null;
+        }
+    }
+
+    public static void save() {
+        for (int i = 0; i <= 4; ++i) {
+            try {
+                PlayerManager.getPlayers().get(i).savePlayer();
+            } catch (IndexOutOfBoundsException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void load() {
+        for (int i = 0; i <= 4; ++i) {
+            try {
+                PlayerManager.getPlayers().get(i).loadPlayer();
+            } catch (IndexOutOfBoundsException e) {
+                e.printStackTrace();
+            }
         }
     }
 

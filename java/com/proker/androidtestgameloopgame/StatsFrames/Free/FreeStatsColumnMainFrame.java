@@ -62,7 +62,6 @@ public class FreeStatsColumnMainFrame implements StatsFrame {
         //helpFrames.add(new HelpFrame(helpFrameText));
         //helpFrameInit();
 
-
         // Init strings
         HP = Constants.CURRENT_CONTEXT.getString(R.string.stats_hp);
         AP = Constants.CURRENT_CONTEXT.getString(R.string.stats_ap);
@@ -81,80 +80,25 @@ public class FreeStatsColumnMainFrame implements StatsFrame {
         STR = Constants.CURRENT_CONTEXT.getString(R.string.stats_str);
         DEX = Constants.CURRENT_CONTEXT.getString(R.string.stats_dex);
         CON = Constants.CURRENT_CONTEXT.getString(R.string.stats_con);
+
         // GET THIS VARS FROM SAVE FILE
-        switch (index) {
-            case 1:
-                HPC = PlayerManager.getPlayers().get(index - 1).getHPC() + "/" + PlayerManager.getPlayers().get(index - 1).getHPMAX();
-                APC = "100/" + "100";
-                WPNC = "VODKA";
-                NAMEC = PlayerManager.getPlayers().get(index - 1).getName();
-                VDKC = "15";
-                BEERC = "20";
-                CTLC = "35";
-                DEFC = "4";
-                LVLC = "1";
-                EXPMIN = "1200";
-                EXPMAX = "6500";
-                EVDC = "15" + "%";
-                CRTC = "20" + "%";
-                STRC = "10";
-                DEXC = "18";
-                CONC = "11";
-                break;
-            case 2:
-                HPC = PlayerManager.getPlayers().get(index - 1).getHPC() + "/" + PlayerManager.getPlayers().get(index - 1).getHPMAX();
-                APC = "100/" + "100";
-                WPNC = "VODKA";
-                NAMEC = PlayerManager.getPlayers().get(index - 1).getName();
-                VDKC = "15";
-                BEERC = "20";
-                CTLC = "35";
-                DEFC = "4";
-                LVLC = "1";
-                EXPMIN = "1200";
-                EXPMAX = "6500";
-                EVDC = "15" + "%";
-                CRTC = "20" + "%";
-                STRC = "10";
-                DEXC = "18";
-                CONC = "11";
-                break;
-            case 3:
-                HPC = "100/" + "140";
-                APC = "100/" + "100";
-                WPNC = "VODKA";
-                NAMEC = Constants.CURRENT_CONTEXT.getString(R.string.player_3_name);
-                VDKC = "15";
-                BEERC = "20";
-                CTLC = "35";
-                DEFC = "4";
-                LVLC = "1";
-                EXPMIN = "1200";
-                EXPMAX = "6500";
-                EVDC = "15" + "%";
-                CRTC = "20" + "%";
-                STRC = "10";
-                DEXC = "18";
-                CONC = "11";
-                break;
-            case 4:
-                HPC = "100/" + "140";
-                APC = "100/" + "100";
-                WPNC = "VODKA";
-                NAMEC = Constants.CURRENT_CONTEXT.getString(R.string.player_4_name);
-                VDKC = "15";
-                BEERC = "20";
-                CTLC = "35";
-                DEFC = "4";
-                LVLC = "1";
-                EXPMIN = "1200";
-                EXPMAX = "6500";
-                EVDC = "15" + "%";
-                CRTC = "20" + "%";
-                STRC = "10";
-                DEXC = "18";
-                CONC = "11";
-                break;
+        for (int i = 0; i <= Constants.PLAYERS_COUNT; ++i) {
+            HPC = PlayerManager.getPlayers().get(index - 1).getHPC() + "/" + PlayerManager.getPlayers().get(index - 1).getHPMAX();
+            APC = PlayerManager.getPlayers().get(index - 1).getAPC() + "/" + PlayerManager.getPlayers().get(index - 1).getAPMAX();
+            WPNC = PlayerManager.getPlayers().get(index - 1).getWPNC();
+            NAMEC = PlayerManager.getPlayers().get(index - 1).getName();
+            VDKC = PlayerManager.getPlayers().get(index - 1).getVDKC();
+            BEERC = PlayerManager.getPlayers().get(index - 1).getBEERC();
+            CTLC = PlayerManager.getPlayers().get(index - 1).getCTLC();
+            DEFC = PlayerManager.getPlayers().get(index - 1).getDEFC();
+            LVLC = PlayerManager.getPlayers().get(index - 1).getLVLC();
+            EXPMIN = PlayerManager.getPlayers().get(index - 1).getEXPMIN();
+            EXPMAX = PlayerManager.getPlayers().get(index - 1).getEXPMAX();
+            EVDC = PlayerManager.getPlayers().get(index - 1).getEVDC() + "%";
+            CRTC = PlayerManager.getPlayers().get(index - 1).getCRTC() + "%";
+            STRC = PlayerManager.getPlayers().get(index - 1).getSTRC();
+            DEXC = PlayerManager.getPlayers().get(index - 1).getDEXC();
+            CONC = PlayerManager.getPlayers().get(index - 1).getCONC();
         }
 
 

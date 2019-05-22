@@ -16,6 +16,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Player extends PlayerVars implements GameObject {
     private SharedPreferences s;
+    private SharedPreferences.Editor e;
 
     private Rect rect;
     private Paint paint;
@@ -32,46 +33,23 @@ public class Player extends PlayerVars implements GameObject {
         paint = new Paint();
         s = Constants.CURRENT_CONTEXT.getSharedPreferences("saveFile", MODE_PRIVATE);
 
+        // Set position
         switch (index) {
             case 1:
-                // Position
                 xpos = (int) ((Constants.SCREEN_WIDTH / 4) / 2);
                 ypos = (int) (Constants.SCREEN_HEIGHT * 0.55f);
                 width = (int) (xpos + pWidth);
                 height = (int) (ypos + pHeight);
-
-                // STATS
+                // Other stats
                 name = Constants.CURRENT_CONTEXT.getString(R.string.player_1_name);
-                HPC = s.getString("player_1_HPC", "");
-                HPMAX = s.getString("player_1_HPMAX", "");
-
-                APC = "100";
-                APMAX = "129";
-                WPNC = "VODKA";
-                VDKC = "15";
-                BEERC = "20";
-                CTLC = "35";
-                DEFC = "4";
-                LVLC = "1";
-                EXPMIN = "1200";
-                EXPMAX = "6500";
-                EVDC = "15" + "%";
-                CRTC = "20" + "%";
-                STRC = "10";
-                DEXC = "18";
-                CONC = "11";
                 break;
             case 2:
-
                 xpos = (int) ((Constants.SCREEN_WIDTH / 4) + (Constants.SCREEN_WIDTH / 4) / 2);
                 ypos = (int) (Constants.SCREEN_HEIGHT * 0.45f);
                 width = (int) (xpos + pWidth);
                 height = (int) (ypos + pHeight);
-
-                // STATS
+                // Other stats
                 name = Constants.CURRENT_CONTEXT.getString(R.string.player_2_name);
-                HPC = "60";
-                HPMAX = "190";
                 break;
 
             case 3:
@@ -79,44 +57,72 @@ public class Player extends PlayerVars implements GameObject {
                 ypos = (int) (Constants.SCREEN_HEIGHT * 0.55f);
                 width = (int) (xpos + pWidth);
                 height = (int) (ypos + pHeight);
-
-                // STATS
+                // Other stats
                 name = Constants.CURRENT_CONTEXT.getString(R.string.player_3_name);
                 break;
             case 4:
-
                 xpos = (int) ((Constants.SCREEN_WIDTH / 4) * 3 + (Constants.SCREEN_WIDTH / 4) / 2)  - (pWidth);
                 ypos = (int) (Constants.SCREEN_HEIGHT * 0.45f);
                 width = (int) (xpos + pWidth);
                 height = (int) (ypos + pHeight);
-
-                // STATS
+                // Other stats
                 name = Constants.CURRENT_CONTEXT.getString(R.string.player_4_name);
                 break;
         }
-        rect = new Rect(xpos, ypos, width, height);
 
-//        type;
-//
-//        HP;
-//        MAXHP;
-//        AP;
-//        MAXAP;
-//        WPN;
-//
-//        VDK;
-//        BEER;
-//        CTL;
-//        DEF;
-//        EVD;
-//        CRT;
-//        LVL;
-//        EXP;
-//        MAXEXP;
-//
-//        STR;
-//        DEX;
-//        CON;
+        // Load Player Stats
+        loadPlayer();
+
+        // Init rectangle
+        rect = new Rect(xpos, ypos, width, height);
+    }
+
+    public void savePlayer() {
+        SharedPreferences.Editor e = s.edit();
+        e.putString("isFirstTime", "false");
+        e.putString("player_" + index + "_HPC", HPC + 40);
+        e.putString("player_" + index + "_HPMAX", HPMAX);
+        e.putString("player_" + index + "_APC", APC);
+        e.putString("player_" + index + "_APMAX", APMAX);
+        e.putString("player_" + index + "_WPNC", WPNC);
+        e.putString("player_" + index + "_VDKC", VDKC);
+        e.putString("player_" + index + "_BEERC", BEERC);
+        e.putString("player_" + index + "_CTLC", CTLC);
+        e.putString("player_" + index + "_DEFC", DEFC);
+        e.putString("player_" + index + "_LVLC", LVLC);
+        e.putString("player_" + index + "_EXPMIN", EXPMIN);
+        e.putString("player_" + index + "_EXPMAX", EXPMAX);
+        e.putString("player_" + index + "_EVDC", EVDC);
+        e.putString("player_" + index + "_CRTC", CRTC);
+        e.putString("player_" + index + "_STRC", STRC);
+        e.putString("player_" + index + "_DEXC", DEXC);
+        e.putString("player_" + index + "_CONC", CONC);
+        System.out.println(EngineStrings.engineText() + "Player stats saved");
+    }
+
+    public void loadPlayer() {
+        // Set stats
+        for (int i = 0; i <= Constants.PLAYERS_COUNT; ++i) {
+            // STATS
+            HPC = s.getString("player_" + index + "_HPC", "");
+            HPMAX = s.getString("player_" + index + "_HPMAX", "");
+            APC = s.getString("player_" + index + "_APC", "");
+            APMAX = s.getString("player_" + index + "_APMAX", "");
+            WPNC = s.getString("player_" + index + "_WPNC", "");
+            VDKC = s.getString("player_" + index + "_VDKC", "");
+            BEERC = s.getString("player_" + index + "_BEERC", "");
+            CTLC = s.getString("player_" + index + "_CTLC", "");
+            DEFC = s.getString("player_" + index + "_DEFC", "");
+            LVLC = s.getString("player_" + index + "_LVLC", "");
+            EXPMIN = s.getString("player_" + index + "_EXPMIN", "");
+            EXPMAX = s.getString("player_" + index + "_EXPMAX", "");
+            EVDC = s.getString("player_" + index + "_EVDC", "");
+            CRTC = s.getString("player_" + index + "_CRTC", "");
+            STRC = s.getString("player_" + index + "_STRC", "");
+            DEXC = s.getString("player_" + index + "_DEXC", "");
+            CONC = s.getString("player_" + index + "_CONC", "");
+            System.out.println(EngineStrings.engineText() + "Player stats loaded");
+        }
     }
 
     @Override
