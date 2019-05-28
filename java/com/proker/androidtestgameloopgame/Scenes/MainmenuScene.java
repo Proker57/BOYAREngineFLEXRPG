@@ -208,6 +208,8 @@ public class MainmenuScene implements Scene {
                         // Start button
                         if (buttonManager.buttons.get(ButtonEnumMainMenu.start).getRect().contains((int) event.getX(), (int) event.getY())) {
                             System.out.println(EngineStrings.engineText() + " Button 1 UP");
+                            // Load game
+                            EngineStrings.load();
                             // World map or any other
                             Constants.GAME_SCENE_ACTIVE_SCENE = 3;
                             // Change to GameScene

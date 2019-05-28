@@ -15,9 +15,9 @@ public class FreeStatsFrame implements StatsFrame {
     public FreeStatsFrame() {
         Constants.FREE_STATS_COLUMN_WIDTH = (int) (Constants.SCREEN_WIDTH / 4);
 
-        for (int i = 0; i <= Constants.PLAYERS_COUNT; ++i) {
+        for (int i = 0; i < Constants.PLAYERS_COUNT; i++) {
             if (freeStatsColumns.isEmpty() || freeStatsColumns.size() != Constants.PLAYERS_COUNT) {
-                freeStatsColumns.add(new FreeStatsColumn(i + 1, Constants.FREE_STATS_COLUMN_WIDTH * i));
+                freeStatsColumns.add(new FreeStatsColumn(i, Constants.FREE_STATS_COLUMN_WIDTH * i));
             }
 
         }

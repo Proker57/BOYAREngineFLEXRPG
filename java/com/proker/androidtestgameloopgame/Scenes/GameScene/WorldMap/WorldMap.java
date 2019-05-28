@@ -1,5 +1,7 @@
 package com.proker.androidtestgameloopgame.Scenes.GameScene.WorldMap;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -19,6 +21,8 @@ import com.proker.androidtestgameloopgame.Scenes.Scene;
 import java.util.ArrayList;
 
 public class WorldMap implements Scene {
+    private static SharedPreferences s;
+    private static SharedPreferences.Editor e;
 
     // Rects
     private Rect rect;
@@ -31,7 +35,7 @@ public class WorldMap implements Scene {
     private static Bitmap map, player;
     private float xBCenter, yBCenter, xFCenter, yFCenter, xCenter, yCenter;
     public static int xpos, ypos, dx, dy;
-    private int playerX, playerY;
+    private static int playerX, playerY;
 
     private ArrayList<Destination> destinations = new ArrayList<>();
     private ArrayList<Wall> walls = new ArrayList<>();
@@ -44,6 +48,9 @@ public class WorldMap implements Scene {
             isMovable = false;
 
     public WorldMap() {
+        s = Constants.CURRENT_CONTEXT.getSharedPreferences("saveFile", Context.MODE_PRIVATE);
+        e = s.edit();
+
         paint = new Paint();
 
         // Add Bitmap
@@ -52,8 +59,16 @@ public class WorldMap implements Scene {
         player = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.world_map_player);
 
         // Start location of map
-        xpos = 0;
-        ypos = Constants.TOP_BAR_HEIGHT;
+        if (!s.contains("world_map_xpos") && !s.contains("world_map_ypos")) {
+            xpos = 0;
+            ypos = Constants.TOP_BAR_HEIGHT;
+            e.putString("world_map_xpos", String.valueOf(xpos));
+            e.putString("world_map_ypos", String.valueOf(ypos));
+            e.commit();
+        } else {
+            xpos = Integer.valueOf(s.getString("world_map_xpos", ""));
+            ypos = Integer.valueOf(s.getString("world_map_ypos", ""));
+        }
 
         // Useless code
 //        xBCenter = (int) (0 - map.getWidth() / 2);
@@ -65,9 +80,17 @@ public class WorldMap implements Scene {
         // Delta x
         dx = player.getWidth();
         dy = player.getHeight();
-        // Rect init
-        playerX = 4 * player.getWidth();
-        playerY = 3 * player.getHeight() + Constants.TOP_BAR_HEIGHT;
+
+        if (!s.contains("world_map_player_playerX")) {
+            playerX = 4 * dx;
+            playerY = 3 * dy + Constants.TOP_BAR_HEIGHT;
+            e.putString("world_map_player_playerX", String.valueOf(playerX));
+            e.putString("world_map_player_playerY", String.valueOf(playerY));
+            e.commit();
+        } else {
+            playerX = Integer.valueOf(s.getString("world_map_player_playerX", ""));
+            playerY = Integer.valueOf(s.getString("world_map_player_playerY", ""));
+        }
 
         rect = new Rect(0, Constants.GAME_BOARD_Y, Constants.GAME_BOARD_WIDTH, Constants.GAME_BOARD_HEIGHT);
         rectPlayer = new Rect(playerX + 1, playerY + 1, playerX + player.getWidth() - 1, playerY + player.getHeight() - 1);
@@ -111,6 +134,28 @@ public class WorldMap implements Scene {
 
     private void addBattleCamps() {
         battleCamps.add(new BattleCamp(0, xpos + 9 * dx, ypos + 13 * dy));
+    }
+
+    public static void save() {
+        // Locataion of map
+        e.putString("world_map_xpos", String.valueOf(xpos));
+        e.putString("world_map_ypos", String.valueOf(ypos));
+        // Location on player
+        e.putString("world_map_player_playerX", String.valueOf(playerX));
+        e.putString("world_map_player_playerY", String.valueOf(playerY));
+
+        // Save changes
+        e.commit();
+    }
+
+    public static void load() {
+        // Location of map
+        xpos = Integer.valueOf(s.getString("world_map_xpos", ""));
+        ypos = Integer.valueOf(s.getString("world_map_ypos", ""));
+        // Location of player
+        playerX = Integer.valueOf(s.getString("world_map_player_playerX", ""));
+        playerY = Integer.valueOf(s.getString("world_map_player_playerY", ""));
+
     }
 
     @Override

@@ -32,10 +32,6 @@ public class FreeStatsColumn implements StatsFrame {
         spellButtonManager.add(xpos, Constants.STATS_COLUMN_SPELL_BUTTON_Y, Constants.STATS_COLUMN_SPELL_BUTTON_WIDTH, Constants.STATS_COLUMN_SPELL_BUTTON_HEIGHT, spell_button_text, Constants.CURRENT_CONTEXT.getResources().getDimension(R.dimen.freeStatsColumn_spellButtonManager_button), Color.WHITE);
     }
 
-    public FreeStatsColumn() {
-
-    }
-
     @Override
     public void update() {
         spellButtonManager.update();

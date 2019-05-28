@@ -82,23 +82,25 @@ public class FreeStatsColumnMainFrame implements StatsFrame {
         CON = Constants.CURRENT_CONTEXT.getString(R.string.stats_con);
 
         // GET THIS VARS FROM SAVE FILE
-        for (int i = 0; i <= Constants.PLAYERS_COUNT; ++i) {
-            HPC = PlayerManager.getPlayers().get(index - 1).getHPC() + "/" + PlayerManager.getPlayers().get(index - 1).getHPMAX();
-            APC = PlayerManager.getPlayers().get(index - 1).getAPC() + "/" + PlayerManager.getPlayers().get(index - 1).getAPMAX();
-            WPNC = PlayerManager.getPlayers().get(index - 1).getWPNC();
-            NAMEC = PlayerManager.getPlayers().get(index - 1).getName();
-            VDKC = PlayerManager.getPlayers().get(index - 1).getVDKC();
-            BEERC = PlayerManager.getPlayers().get(index - 1).getBEERC();
-            CTLC = PlayerManager.getPlayers().get(index - 1).getCTLC();
-            DEFC = PlayerManager.getPlayers().get(index - 1).getDEFC();
-            LVLC = PlayerManager.getPlayers().get(index - 1).getLVLC();
-            EXPMIN = PlayerManager.getPlayers().get(index - 1).getEXPMIN();
-            EXPMAX = PlayerManager.getPlayers().get(index - 1).getEXPMAX();
-            EVDC = PlayerManager.getPlayers().get(index - 1).getEVDC() + "%";
-            CRTC = PlayerManager.getPlayers().get(index - 1).getCRTC() + "%";
-            STRC = PlayerManager.getPlayers().get(index - 1).getSTRC();
-            DEXC = PlayerManager.getPlayers().get(index - 1).getDEXC();
-            CONC = PlayerManager.getPlayers().get(index - 1).getCONC();
+        for (int i = 0; i < Constants.PLAYERS_COUNT; i++) {
+            if (i == index) {
+                HPC = PlayerManager.getPlayers().get(index).getHPC() + "/" + PlayerManager.getPlayers().get(index).getHPMAX();
+                APC = PlayerManager.getPlayers().get(index).getAPC() + "/" + PlayerManager.getPlayers().get(index).getAPMAX();
+                WPNC = PlayerManager.getPlayers().get(index).getWPNC();
+                NAMEC = PlayerManager.getPlayers().get(index).getName();
+                VDKC = PlayerManager.getPlayers().get(index).getVDKC();
+                BEERC = PlayerManager.getPlayers().get(index).getBEERC();
+                CTLC = PlayerManager.getPlayers().get(index).getCTLC();
+                DEFC = PlayerManager.getPlayers().get(index).getDEFC();
+                LVLC = PlayerManager.getPlayers().get(index).getLVLC();
+                EXPMIN = PlayerManager.getPlayers().get(index).getEXPMIN();
+                EXPMAX = PlayerManager.getPlayers().get(index).getEXPMAX();
+                EVDC = PlayerManager.getPlayers().get(index).getEVDC() + "%";
+                CRTC = PlayerManager.getPlayers().get(index).getCRTC() + "%";
+                STRC = PlayerManager.getPlayers().get(index).getSTRC();
+                DEXC = PlayerManager.getPlayers().get(index).getDEXC();
+                CONC = PlayerManager.getPlayers().get(index).getCONC();
+            }
         }
 
 
@@ -462,7 +464,30 @@ public class FreeStatsColumnMainFrame implements StatsFrame {
                 }
                 break;
             case 2:     // Battle
-
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        if (rect.contains((int) event.getX(), (int) event.getY())) {
+                            handler.postDelayed(mLongPressed, 1000);
+                        }
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        // Spell button
+                        if (rect.contains((int) event.getX(), (int) event.getY()) && helpFrameIsVisible == false) {
+                            if (state < 3) {
+                                state++;
+                            } else {
+                                state = 0;
+                            }
+                            System.out.println(EngineStrings.engineText() + " Free Stats Column Main Frame " + index + " pressed");
+                        }
+                        handler.removeCallbacks(mLongPressed);
+                        // Remove help frame object
+                        if (!helpFrames.isEmpty()) {
+                            helpFrames.remove(0);
+                            helpFrameIsVisible = false;
+                        }
+                        break;
+                }
                 break;
         }
     }

@@ -12,8 +12,8 @@ public class PlayerManager implements GameObject {
     private static ArrayList<Player> players = new ArrayList<>();
 
     public PlayerManager(int count) {
-        for (int i = 0; i <= count - 1; ++i) {
-            players.add(new Player(i + 1));
+        for (int i = 0; i < count; i++) {
+            players.add(new Player(i));
         }
     }
 
