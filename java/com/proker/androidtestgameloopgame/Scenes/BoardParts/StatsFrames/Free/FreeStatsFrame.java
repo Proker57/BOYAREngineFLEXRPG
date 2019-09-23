@@ -1,10 +1,10 @@
-package com.proker.androidtestgameloopgame.StatsFrames.Free;
+package com.proker.androidtestgameloopgame.Scenes.BoardParts.StatsFrames.Free;
 
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
 import com.proker.androidtestgameloopgame.Engine.Constants;
-import com.proker.androidtestgameloopgame.StatsFrames.StatsFrame;
+import com.proker.androidtestgameloopgame.Scenes.BoardParts.StatsFrames.StatsFrame;
 
 import java.util.ArrayList;
 

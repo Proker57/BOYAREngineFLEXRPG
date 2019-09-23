@@ -1,4 +1,4 @@
-package com.proker.androidtestgameloopgame.StatsFrames.Free;
+package com.proker.androidtestgameloopgame.Scenes.BoardParts.StatsFrames.Free;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,7 +8,7 @@ import com.proker.androidtestgameloopgame.Buttons.ButtonManager;
 import com.proker.androidtestgameloopgame.Engine.Constants;
 import com.proker.androidtestgameloopgame.Engine.EngineStrings;
 import com.proker.androidtestgameloopgame.R;
-import com.proker.androidtestgameloopgame.StatsFrames.StatsFrame;
+import com.proker.androidtestgameloopgame.Scenes.BoardParts.StatsFrames.StatsFrame;
 
 public class FreeStatsColumn implements StatsFrame {
     private int index, xpos;

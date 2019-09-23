@@ -1,4 +1,4 @@
-package com.proker.androidtestgameloopgame.TopBar;
+package com.proker.androidtestgameloopgame.Scenes.BoardParts.TopBar;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

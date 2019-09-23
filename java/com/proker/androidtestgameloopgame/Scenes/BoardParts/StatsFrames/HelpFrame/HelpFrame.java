@@ -1,4 +1,4 @@
-package com.proker.androidtestgameloopgame.StatsFrames.HelpFrame;
+package com.proker.androidtestgameloopgame.Scenes.BoardParts.StatsFrames.HelpFrame;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

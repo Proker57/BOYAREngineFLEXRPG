@@ -1,4 +1,4 @@
-package com.proker.androidtestgameloopgame.GameBoard;
+package com.proker.androidtestgameloopgame.Scenes.BoardParts;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

@@ -1,4 +1,4 @@
-package com.proker.androidtestgameloopgame.StatsFrames.Free;
+package com.proker.androidtestgameloopgame.Scenes.BoardParts.StatsFrames.Free;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -14,8 +14,8 @@ import com.proker.androidtestgameloopgame.Engine.EngineStrings;
 import com.proker.androidtestgameloopgame.Engine.FontManager;
 import com.proker.androidtestgameloopgame.Objects.Player.PlayerManager;
 import com.proker.androidtestgameloopgame.R;
-import com.proker.androidtestgameloopgame.StatsFrames.HelpFrame.HelpFrame;
-import com.proker.androidtestgameloopgame.StatsFrames.StatsFrame;
+import com.proker.androidtestgameloopgame.Scenes.BoardParts.StatsFrames.HelpFrame.HelpFrame;
+import com.proker.androidtestgameloopgame.Scenes.BoardParts.StatsFrames.StatsFrame;
 
 import java.util.ArrayList;
 

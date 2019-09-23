@@ -12,10 +12,11 @@ public class SceneManager {
     public static int ACTIVE_SCENE;
 
     public SceneManager() {
-        ACTIVE_SCENE = 1;
+        ACTIVE_SCENE = 3;
         scenes.add(new GameplayScene());    // 0
         scenes.add(new MainmenuScene());    // 1
         scenes.add(new GameScene());        // 2
+        scenes.add(new TestMapScene());     // 3
     }
 
     public void recieveTouch(MotionEvent event) {

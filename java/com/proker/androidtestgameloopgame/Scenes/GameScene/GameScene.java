@@ -6,15 +6,15 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 
-import com.proker.androidtestgameloopgame.BottomButtons.BottomButtons;
+import com.proker.androidtestgameloopgame.Scenes.BoardParts.BottomButtons;
 import com.proker.androidtestgameloopgame.Engine.Constants;
 import com.proker.androidtestgameloopgame.Engine.EngineStrings;
-import com.proker.androidtestgameloopgame.GameBoard.GameBoard;
+import com.proker.androidtestgameloopgame.Scenes.BoardParts.GameBoard;
 import com.proker.androidtestgameloopgame.Objects.Player.PlayerManager;
 import com.proker.androidtestgameloopgame.Scenes.Scene;
-import com.proker.androidtestgameloopgame.StatsFrames.Free.FreeStatsFrame;
-import com.proker.androidtestgameloopgame.StatsFrames.StatsFrameManager;
-import com.proker.androidtestgameloopgame.TopBar.TopBar;
+import com.proker.androidtestgameloopgame.Scenes.BoardParts.StatsFrames.Free.FreeStatsFrame;
+import com.proker.androidtestgameloopgame.Scenes.BoardParts.StatsFrames.StatsFrameManager;
+import com.proker.androidtestgameloopgame.Scenes.BoardParts.TopBar.TopBar;
 
 public class GameScene implements Scene {
 

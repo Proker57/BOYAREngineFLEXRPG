@@ -1,4 +1,4 @@
-package com.proker.androidtestgameloopgame.BottomButtons;
+package com.proker.androidtestgameloopgame.Scenes.BoardParts;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

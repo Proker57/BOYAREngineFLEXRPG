@@ -1,4 +1,4 @@
-package com.proker.androidtestgameloopgame.StatsFrames.Quest;
+package com.proker.androidtestgameloopgame.Scenes.BoardParts.StatsFrames.Quest;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 
 import com.proker.androidtestgameloopgame.Engine.Constants;
-import com.proker.androidtestgameloopgame.StatsFrames.StatsFrame;
+import com.proker.androidtestgameloopgame.Scenes.BoardParts.StatsFrames.StatsFrame;
 
 public class QuestStatsFrame implements StatsFrame {
     private Paint paint;
