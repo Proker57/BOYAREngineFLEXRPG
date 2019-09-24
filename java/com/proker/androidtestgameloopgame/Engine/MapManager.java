@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class MapManager implements Scene {
     private String filename;
-    public static String[] mapSheet, blockSheet;
+    public  String[] blockSheet;
 
     public static int WIDTH, HEIGHT, TILESIZE;
 
@@ -28,10 +28,12 @@ public class MapManager implements Scene {
 
     private ArrayList<String> tilesetNames = new ArrayList<>();
     private ArrayList<Tile> tiles = new ArrayList<>();
+    private ArrayList<Tile> blockTiles = new ArrayList<>();
+    private ArrayList<String[]> sheets = new ArrayList<>();
 
     public MapManager() {
         // Set current map
-        Constants.ACTIVE_MAP = 1;
+        Constants.ACTIVE_MAP = 3;
 
         bf = new BitmapFactory();
         paint = new Paint();
@@ -39,8 +41,11 @@ public class MapManager implements Scene {
         init();
 
         // TEST OUTPUT
-        for (int i = 0; i < mapSheet.length; i++) {
-            System.out.print(mapSheet[i]);
+        for (int i = 0; i < sheets.size(); i++) {
+            System.out.println();
+            for (int j = 0; j < sheets.get(i).length; j++) {
+                System.out.print(sheets.get(i)[j]);
+            }
         }
     }
 
@@ -74,7 +79,6 @@ public class MapManager implements Scene {
             // Get tilesets array and source links
             for (int i = 0; i < mapFile.getJSONArray("tilesets").length(); i++) {
                 tilesetNames.add(mapFile.getJSONArray("tilesets").getJSONObject(i).getString("name"));
-
             }
         } catch (
                 JSONException e) {
@@ -83,26 +87,48 @@ public class MapManager implements Scene {
         // Make new mapSheet
         try {
             for (int i = 0; i < mapFile.getJSONArray("layers").length(); i++) {
-                
+                // Add sheets of movable tiles
+                if (mapFile.getJSONArray("layers").getJSONObject(i).getString("name") != "Block") {
+                    sheets.add(mapFile.getJSONArray("layers").getJSONObject(i).getJSONArray("data").join(",").split(","));
+                } else {
+                    // Add block tiles
+                    blockSheet = mapFile.getJSONArray("layers").getJSONObject(i).getJSONArray("data").join(",").split(",");
+                    // DELETE
+                    for (int j = 0; j < blockSheet.length; j++) {
+                        System.out.print(blockSheet[j]);
+                    }
+                }
             }
-            mapSheet = mapFile.getJSONArray("layers").getJSONObject(0).getJSONArray("data").join(",").split(",");
-            blockSheet = mapFile.getJSONArray("layers").getJSONObject(1).getJSONArray("data").join(",").split(",");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        // k is a index for each var of mapSheet
+
         int k = 0;
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
-                switch (mapSheet[k]) {
-                    case "1":
-                        tiles.add(new Tile(j * (TILESIZE * 2), i * (TILESIZE * 2), TILESIZE, bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), Constants.CURRENT_CONTEXT.getResources().getIdentifier(tilesetNames.get(0), "drawable", Constants.CURRENT_CONTEXT.getPackageName())), paint));
-                        break;
-                    case "2":
-                        tiles.add(new Tile(j * (TILESIZE * 2), i * (TILESIZE * 2), TILESIZE, bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), Constants.CURRENT_CONTEXT.getResources().getIdentifier(tilesetNames.get(1), "drawable", Constants.CURRENT_CONTEXT.getPackageName())), paint));
-                        break;
+                for (int l = 0; l < sheets.size(); l++) {
+                    try {
+                        if (mapFile.getJSONArray("layers").getJSONObject(l).getString("name") != "Block") {
+                            switch (sheets.get(l)[k]) {
+                                case "1":
+                                    tiles.add(new Tile(j * (TILESIZE * 2), i * (TILESIZE * 2), TILESIZE, bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), Constants.CURRENT_CONTEXT.getResources().getIdentifier(tilesetNames.get(0), "drawable", Constants.CURRENT_CONTEXT.getPackageName()))));
+                                    break;
+                                case "2":
+                                    tiles.add(new Tile(j * (TILESIZE * 2), i * (TILESIZE * 2), TILESIZE, bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), Constants.CURRENT_CONTEXT.getResources().getIdentifier(tilesetNames.get(1), "drawable", Constants.CURRENT_CONTEXT.getPackageName()))));
+                                    break;
+                            }
+
+                        } else {
+                            if (blockSheet[k] == "0") {
+                                blockTiles.add(new Tile(j * (TILESIZE * 2), i * (TILESIZE * 2), TILESIZE));
+                            }
+                            k++;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-                k++;
             }
         }
     }

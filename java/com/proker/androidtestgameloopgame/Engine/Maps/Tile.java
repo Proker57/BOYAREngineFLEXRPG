@@ -11,15 +11,22 @@ public class Tile implements Tiles {
     private float tileSize;
     private boolean isMovable = true;
     private Bitmap bitmap;
-    private Paint paint;
     private Rect rect;
 
-    public Tile(float x, float y, int tileSize, Bitmap bitmap, Paint paint) {
+    // Walkable tile
+    public Tile(float x, float y, int tileSize, Bitmap bitmap) {
         this.x = x;
         this.y = y;
         this.tileSize = tileSize;
         this.bitmap = bitmap;
-        this.paint = paint;
+        //rect = new Rect((int) x, (int) y, tileSize, tileSize);
+    }
+
+    // Block tile
+    public Tile(float x, float y, int tileSize) {
+        this.x = x;
+        this.y = y;
+        this.tileSize = tileSize;
         rect = new Rect((int) x, (int) y, tileSize, tileSize);
     }
 
@@ -30,7 +37,7 @@ public class Tile implements Tiles {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, x, y, paint);
+        canvas.drawBitmap(bitmap, x, y, new Paint());
     }
 
     public float getX() {
