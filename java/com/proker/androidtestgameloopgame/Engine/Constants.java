@@ -87,5 +87,7 @@ public class Constants {
     public static int HELP_FRAME_HEIGHT;
     // Wall
     public static int WALL_WIDTH;
+    // Map manager
+    public static int ACTIVE_MAP;
 
 }

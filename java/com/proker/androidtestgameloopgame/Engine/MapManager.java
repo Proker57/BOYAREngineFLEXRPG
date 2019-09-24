@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 
 import com.proker.androidtestgameloopgame.Engine.Maps.Tile;
-import com.proker.androidtestgameloopgame.Engine.Maps.Tiles;
 import com.proker.androidtestgameloopgame.Scenes.Scene;
 
 import org.json.JSONException;
@@ -17,14 +16,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MapManager implements Scene {
-    // ACTIVE MAP
-    public static int ACTIVE_MAP = 2;
-
-    // *********************************************************************************************
     private String filename;
-    public static String[] mapsheet;
+    public static String[] mapSheet, blockSheet;
 
-    private boolean isMapChanged = false;
     public static int WIDTH, HEIGHT, TILESIZE;
 
     private JSONObject mapFile;
@@ -33,13 +27,28 @@ public class MapManager implements Scene {
     private Paint paint;
 
     private ArrayList<String> tilesetNames = new ArrayList<>();
-    private ArrayList<Tiles> tiles = new ArrayList<>();
+    private ArrayList<Tile> tiles = new ArrayList<>();
 
     public MapManager() {
+        // Set current map
+        Constants.ACTIVE_MAP = 1;
+
         bf = new BitmapFactory();
         paint = new Paint();
 
-        switch (ACTIVE_MAP) {
+        init();
+
+        // TEST OUTPUT
+        for (int i = 0; i < mapSheet.length; i++) {
+            System.out.print(mapSheet[i]);
+        }
+    }
+
+    private void init() {
+        tiles.clear();
+        tilesetNames.clear();
+
+        switch (Constants.ACTIVE_MAP) {
             case 0:
                 this.filename = "tilemaps/testmapxml.json";
                 break;
@@ -48,6 +57,9 @@ public class MapManager implements Scene {
                 break;
             case 2:
                 this.filename = "tilemaps/test2.json";
+                break;
+            case 3:
+                this.filename = "tilemaps/test3.json";
                 break;
         }
         try {
@@ -68,19 +80,31 @@ public class MapManager implements Scene {
                 JSONException e) {
             e.printStackTrace();
         }
+        // Make new mapSheet
         try {
-            mapsheet = mapFile.getJSONArray("layers").getJSONObject(0).getJSONArray("data").join(",").split(",");
+            for (int i = 0; i < mapFile.getJSONArray("layers").length(); i++) {
+                
+            }
+            mapSheet = mapFile.getJSONArray("layers").getJSONObject(0).getJSONArray("data").join(",").split(",");
+            blockSheet = mapFile.getJSONArray("layers").getJSONObject(1).getJSONArray("data").join(",").split(",");
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        // TEST OUTPUT
-        for (int i = 0; i < mapsheet.length; i++) {
-            System.out.print(mapsheet[i]);
+        // k is a index for each var of mapSheet
+        int k = 0;
+        for (int i = 0; i < WIDTH; i++) {
+            for (int j = 0; j < HEIGHT; j++) {
+                switch (mapSheet[k]) {
+                    case "1":
+                        tiles.add(new Tile(j * (TILESIZE * 2), i * (TILESIZE * 2), TILESIZE, bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), Constants.CURRENT_CONTEXT.getResources().getIdentifier(tilesetNames.get(0), "drawable", Constants.CURRENT_CONTEXT.getPackageName())), paint));
+                        break;
+                    case "2":
+                        tiles.add(new Tile(j * (TILESIZE * 2), i * (TILESIZE * 2), TILESIZE, bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), Constants.CURRENT_CONTEXT.getResources().getIdentifier(tilesetNames.get(1), "drawable", Constants.CURRENT_CONTEXT.getPackageName())), paint));
+                        break;
+                }
+                k++;
+            }
         }
-
-        buildMap();
-
     }
 
     private String loadJSONFromAsset(String filename) {
@@ -100,38 +124,16 @@ public class MapManager implements Scene {
         return json;
     }
 
-    private void buildMap() {
-        // Make new mapsheet
-        try {
-            mapsheet = mapFile.getJSONArray("layers").getJSONObject(0).getJSONArray("data").join(",").split(",");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        // k is a index for each var of mapsheet
-        int k = 0;
-        for (int i = 0; i < WIDTH; i++) {
-            for (int j = 0; j < HEIGHT; j++) {
-                switch (mapsheet[k]) {
-                    case "1":
-                        tiles.add(new Tile(j * (TILESIZE * 2), i * (TILESIZE * 2), bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), Constants.CURRENT_CONTEXT.getResources().getIdentifier(tilesetNames.get(0), "drawable", Constants.CURRENT_CONTEXT.getPackageName())), paint));
-                        break;
-                    case "2":
-                        tiles.add(new Tile(j * (TILESIZE * 2), i * (TILESIZE * 2), bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), Constants.CURRENT_CONTEXT.getResources().getIdentifier(tilesetNames.get(1), "drawable", Constants.CURRENT_CONTEXT.getPackageName())), paint));
-                        break;
-                }
-                k++;
-            }
-        }
+    public void changeMap(int index) {
+        Constants.ACTIVE_MAP = index;
+        init();
     }
 
     @Override
     public void update() {
-        if (isMapChanged) {
-            // Do clears
-            tiles.clear();
-            tilesetNames.clear();
-            buildMap();
-            isMapChanged = false;
+        // Making camera move
+        for (int i = 0; i < tiles.size(); i++) {
+            //tiles.get(i).setX(tiles.get(i).getX() + 1);
         }
 
     }
@@ -139,7 +141,10 @@ public class MapManager implements Scene {
     @Override
     public void draw(Canvas canvas) {
         for (int i = 0; i < WIDTH * HEIGHT; i++) {
-            tiles.get(i).draw(canvas);
+            // Draw only visible tiles on screen
+            if (tiles.get(i).getX() >= -TILESIZE && tiles.get(i).getX() <= Constants.SCREEN_WIDTH + TILESIZE && tiles.get(i).getY() >=  - TILESIZE && tiles.get(i).getY() <= Constants.SCREEN_HEIGHT + TILESIZE) {
+                tiles.get(i).draw(canvas);
+            }
         }
     }
 
