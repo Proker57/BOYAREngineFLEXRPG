@@ -27,7 +27,7 @@ public class Tile implements Tiles {
         this.x = x;
         this.y = y;
         this.tileSize = tileSize;
-        rect = new Rect((int) x, (int) y, tileSize, tileSize);
+        rect = new Rect((int) x, (int) y, (int) x + tileSize * 2, (int) y + tileSize * 2);
     }
 
     @Override

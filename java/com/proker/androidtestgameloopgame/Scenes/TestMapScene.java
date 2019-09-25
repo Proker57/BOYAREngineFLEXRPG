@@ -26,11 +26,11 @@ public class TestMapScene implements Scene {
 
     @Override
     public void terminate() {
-
+        map.terminate();
     }
 
     @Override
     public void recieveTouch(MotionEvent event) {
-
+        map.recieveTouch(event);
     }
 }
