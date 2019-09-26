@@ -97,7 +97,7 @@ public class GameScene implements Scene {
                 }
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(EngineStrings.engineText() + "ERROR: Player ArrayList is out of bounds, Size: " + playerManager.getPlayers().size());
+            System.out.println(EngineStrings.engineText() + "ERROR: PlayerOld ArrayList is out of bounds, Size: " + playerManager.getPlayers().size());
         }
 
 

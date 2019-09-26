@@ -14,7 +14,7 @@ public class Constants {
     // Start timer
     public static long INIT_TIME;
 
-    // Player count
+    // PlayerOld count
     public static int PLAYERS_COUNT;
 
     // Main menu scene *****************************************************************************
@@ -89,5 +89,6 @@ public class Constants {
     public static int WALL_WIDTH;
     // Map manager
     public static int ACTIVE_MAP;
+    public static int TILESIZE;
 
 }

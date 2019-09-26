@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Engine.Main.MainActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="sensorLandscape"
             android:configChanges="locale|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -9,41 +9,41 @@ import java.util.ArrayList;
 
 public class PlayerManager implements GameObject {
 
-    private static ArrayList<Player> players = new ArrayList<>();
+    private static ArrayList<PlayerOld> players = new ArrayList<>();
 
     public PlayerManager(int count) {
         for (int i = 0; i < count; i++) {
-            players.add(new Player(i));
+            players.add(new PlayerOld(i));
         }
     }
 
 
     @Override
     public void draw(Canvas canvas) {
-        for (Player player : players) {
+        for (PlayerOld player : players) {
             player.draw(canvas);
         }
     }
 
     @Override
     public void update() {
-        for (Player player : players) {
+        for (PlayerOld player : players) {
             player.update();
         }
     }
 
     @Override
     public void recieveTouch(MotionEvent event) {
-        for (Player player : players) {
+        for (PlayerOld player : players) {
             player.recieveTouch(event);
         }
     }
 
-    public static ArrayList<Player> getPlayers() {
+    public static ArrayList<PlayerOld> getPlayers() {
         return players;
     }
 
-    public void setPlayers(ArrayList<Player> players) {
+    public void setPlayers(ArrayList<PlayerOld> players) {
         this.players = players;
     }
 

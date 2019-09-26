@@ -1,5 +1,6 @@
 package com.proker.androidtestgameloopgame.Engine;
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -17,11 +18,11 @@ import java.util.ArrayList;
 
 public class MapManager implements Scene {
     private String filename;
-    public  String[] blockSheet;
+    private String[] blockSheet;
 
     private int sizeLayers;
 
-    public static int WIDTH, HEIGHT, TILESIZE;
+    private int WIDTH, HEIGHT, TILESIZE;
 
     private JSONObject mapFile;
 
@@ -31,11 +32,12 @@ public class MapManager implements Scene {
     private ArrayList<String> tilesetNames = new ArrayList<>();
     private ArrayList<Tile> tiles = new ArrayList<>();
     private ArrayList<Tile> blockTiles = new ArrayList<>();
-    private ArrayList<String[]> sheets = new ArrayList<>();
+    private ArrayList<String[]> sheets = new ArrayList<>(4);
+    private ArrayList<Bitmap> bitmaps = new ArrayList<>();
 
     public MapManager() {
         // Set current map
-        Constants.ACTIVE_MAP = 5;
+        Constants.ACTIVE_MAP = 4;
 
         bf = new BitmapFactory();
         paint = new Paint();
@@ -60,6 +62,8 @@ public class MapManager implements Scene {
         tiles.clear();
         tilesetNames.clear();
         blockTiles.clear();
+        sheets.clear();
+        bitmaps.clear();
 
         switch (Constants.ACTIVE_MAP) {
             case 0:
@@ -84,8 +88,6 @@ public class MapManager implements Scene {
         try {
             // Load tile map file
             mapFile = new JSONObject(loadJSONFromAsset(filename));
-            // Get TILESIZE
-            TILESIZE = mapFile.getInt("tilewidth") * 2;
             // Get WIDTH of map
             WIDTH = mapFile.getInt("width");
             // Get HEIGHT of map
@@ -106,19 +108,21 @@ public class MapManager implements Scene {
                 // Add sheets of movable tiles
                 if (mapFile.getJSONArray("layers").getJSONObject(i).getString("name").compareToIgnoreCase("Block") != 0) {
                     sheets.add(mapFile.getJSONArray("layers").getJSONObject(i).getJSONArray("data").join(",").split(","));
-                    System.out.println("ADD SHEET: " + mapFile.getJSONArray("layers").getJSONObject(i).getString("name"));
                 } else {
                     // Add block tiles
                     blockSheet = mapFile.getJSONArray("layers").getJSONObject(i).getJSONArray("data").join(",").split(",");
-                    System.out.println("ADD Block sheet: " + mapFile.getJSONArray("layers").getJSONObject(i).getString("name"));
                 }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        // DELETE
-        System.out.println("Sheet size: " + sheets.size() + " *");
+        for (int i = 0; i < tilesetNames.size(); i++) {
+            bitmaps.add(bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), Constants.CURRENT_CONTEXT.getResources().getIdentifier(tilesetNames.get(i), "drawable", Constants.CURRENT_CONTEXT.getPackageName())));
+        }
+
+        // Get TILESIZE
+        Constants.TILESIZE = bitmaps.get(0).getWidth();
 
         for (int l = 0; l < sheets.size(); l++) {
             int k = 0;
@@ -126,16 +130,16 @@ public class MapManager implements Scene {
                 for (int j = 0; j < HEIGHT; j++) {
                     switch (sheets.get(l)[k]) {
                         case "1":
-                            tiles.add(new Tile(j * TILESIZE, i * TILESIZE, TILESIZE, bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), Constants.CURRENT_CONTEXT.getResources().getIdentifier(tilesetNames.get(0), "drawable", Constants.CURRENT_CONTEXT.getPackageName()))));
+                            tiles.add(new Tile(j * Constants.TILESIZE, i * Constants.TILESIZE, Constants.TILESIZE, bitmaps.get(0)));
                             break;
                         case "2":
-                            tiles.add(new Tile(j * TILESIZE, i * TILESIZE, TILESIZE, bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), Constants.CURRENT_CONTEXT.getResources().getIdentifier(tilesetNames.get(1), "drawable", Constants.CURRENT_CONTEXT.getPackageName()))));
+                            tiles.add(new Tile(j * Constants.TILESIZE, i * Constants.TILESIZE, Constants.TILESIZE, bitmaps.get(1)));
                             break;
                         case "3":
-                            tiles.add(new Tile(j * TILESIZE, i * TILESIZE, TILESIZE, bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), Constants.CURRENT_CONTEXT.getResources().getIdentifier(tilesetNames.get(2), "drawable", Constants.CURRENT_CONTEXT.getPackageName()))));
+                            tiles.add(new Tile(j * Constants.TILESIZE, i * Constants.TILESIZE, Constants.TILESIZE, bitmaps.get(2)));
                             break;
                         case "4":
-                            tiles.add(new Tile(j * TILESIZE, i * TILESIZE, TILESIZE, bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), Constants.CURRENT_CONTEXT.getResources().getIdentifier(tilesetNames.get(3), "drawable", Constants.CURRENT_CONTEXT.getPackageName()))));
+                            tiles.add(new Tile(j * Constants.TILESIZE, i * Constants.TILESIZE, Constants.TILESIZE, bitmaps.get(3)));
                             break;
                     }
                     k++;
@@ -151,11 +155,6 @@ public class MapManager implements Scene {
                 k++;
             }
         }
-        // DELETE
-        System.out.println(tiles.size() + "TILES SIZE");
-        System.out.println(blockTiles.size() + "BLOCK TILES SIZE");
-
-
     }
 
     private String loadJSONFromAsset(String filename) {
@@ -184,7 +183,7 @@ public class MapManager implements Scene {
     public void update() {
         // Making camera move
         for (int i = 0; i < tiles.size(); i++) {
-            //tiles.get(i).setX(tiles.get(i).getX() -1);
+            tiles.get(i).setX(tiles.get(i).getX() -1);
         }
 
     }
@@ -216,7 +215,6 @@ public class MapManager implements Scene {
                         System.out.println("LOH PIDOR");
                     }
                 }
-                System.out.println(blockTiles.size());
                 break;
         }
     }
