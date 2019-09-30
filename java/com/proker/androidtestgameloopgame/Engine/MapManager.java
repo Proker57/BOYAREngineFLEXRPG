@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 
 import com.proker.androidtestgameloopgame.Engine.Maps.Tile;
+import com.proker.androidtestgameloopgame.Objects.Player.Player;
 import com.proker.androidtestgameloopgame.Scenes.Scene;
 
 import org.json.JSONException;
@@ -182,9 +183,17 @@ public class MapManager implements Scene {
     @Override
     public void update() {
         // Making camera move
-        for (int i = 0; i < tiles.size(); i++) {
-            tiles.get(i).setX(tiles.get(i).getX() -1);
+        if (Player.x < Constants.SCREEN_WIDTH * 0.4 || !(tiles.get(0).getX() <= 0)) {
+            for (int i = 0; i < tiles.size(); i++) {
+                tiles.get(i).setX(tiles.get(i).getX() - Player.dx);
+            }
         }
+        if (Player.x > Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH * 0.4 || !(tiles.get(tiles.size() - 1).getX() >= WIDTH * TILESIZE)) {
+            for (int i = 0; i < tiles.size(); i++) {
+                tiles.get(i).setX(tiles.get(i).getX() + Player.dx);
+            }
+        }
+
 
     }
 

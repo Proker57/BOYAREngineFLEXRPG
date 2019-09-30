@@ -13,7 +13,7 @@ import com.proker.androidtestgameloopgame.Objects.GameObject;
 
 public class Player implements GameObject {
     public static int x, y;
-    public static float dx, dy;
+    public static float dx, dy, walkSpeed, runSpeed;
     private int WIDTH, HEIGHT;
     private Rect rect;
     private Paint paint;
@@ -25,6 +25,8 @@ public class Player implements GameObject {
         this.y = y;
         dx = 0;
         dy = 0;
+        walkSpeed = 3;
+        runSpeed = 10;
 
         WIDTH = x + Constants.TILESIZE + Constants.TILESIZE;
         HEIGHT = y + Constants.TILESIZE + Constants.TILESIZE;
